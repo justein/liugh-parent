@@ -82,19 +82,25 @@ public class User extends Model<User> {
      * 邀请码
      * 默认000001为管理员邀请的用户
      * */
+    @TableField("invite_user_id")
     private String inviteUserId;
     /**
      * 用于封禁账号
      * */
+    @TableField("is_valid")
     private String isValid;
     /**
      * 当前所在公司
      * */
-    private String currentCompanyId;
+    @TableField("company_id")
+    private String companyId;
 
     /**已帮助到多少人*/
-    private Integer helpUserNumber;
+    @TableField("help_number")
+    private Integer helpNumber;
 
+    /**获得多少星*/
+    @TableField("acquire_stars")
     private Double acquireStars;
 
 
