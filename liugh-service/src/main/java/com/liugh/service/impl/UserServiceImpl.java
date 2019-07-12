@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -72,7 +73,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public User register(User user, String  roleCode) {
         user.setUserNo(GenerationSequenceUtil.generateUUID("user"));
-        user.setCreateTime(System.currentTimeMillis());
+        user.setCreateTime(LocalDateTime.now());
         boolean result = this.insert(user);
         if (result) {
             UserToRole userToRole  = UserToRole.builder().userNo(user.getUserNo()).roleCode(roleCode).build();
@@ -177,13 +178,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         }
         List<SmsVerify> smsVerifies = smsVerifyService.getByMobileAndCaptchaAndType(userRegister.getMobile(),
                 requestJson.getString("captcha"), SmsSendUtil.SMSType.getType(SmsSendUtil.SMSType.REG.name()));
-        if(ComUtil.isEmpty(smsVerifies)){
-            throw new BusinessException(PublicResultConstant.VERIFY_PARAM_ERROR);
-        }
+//        if(ComUtil.isEmpty(smsVerifies)){
+//            throw new BusinessException(PublicResultConstant.VERIFY_PARAM_ERROR);
+//        }
         //验证码是否过期
-        if(SmsSendUtil.isCaptchaPassTime(smsVerifies.get(0).getCreateTime())){
-            throw new BusinessException(PublicResultConstant.VERIFY_PARAM_PASS);
-        }
+//        if(SmsSendUtil.isCaptchaPassTime(smsVerifies.get(0).getCreateTime())){
+//            throw new BusinessException(PublicResultConstant.VERIFY_PARAM_PASS);
+//        }
         userRegister.setPassword(BCrypt.hashpw(requestJson.getString("password"), BCrypt.gensalt()));
         //默认注册普通用户
         return this.register(userRegister, Constant.RoleType.USER);

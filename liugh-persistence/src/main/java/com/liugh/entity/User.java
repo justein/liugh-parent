@@ -1,6 +1,7 @@
 package com.liugh.entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
@@ -58,7 +59,7 @@ public class User extends Model<User> {
      * 创建时间
      */
     @TableField("create_time")
-    private Long createTime;
+    private LocalDateTime createTime;
     /**
      * 头像
      */
@@ -82,26 +83,26 @@ public class User extends Model<User> {
      * 邀请码
      * 默认000001为管理员邀请的用户
      * */
-    @TableField("invite_user_id")
-    private String inviteUserId;
+    @TableField("invite_user_code")
+    private String inviteUserCode;
     /**
-     * 用于封禁账号
+     * 专属邀请码
      * */
-    @TableField("is_valid")
-    private String isValid;
+    @TableField("user_code")
+    private String userCode;
     /**
      * 当前所在公司
      * */
     @TableField("company_id")
     private String companyId;
 
-    /**已帮助到多少人*/
-    @TableField("help_number")
-    private Integer helpNumber;
-
     /**获得多少星*/
     @TableField("acquire_stars")
     private Double acquireStars;
+    /**是否实名认证*/
+    @TableField("nameauth_flag")
+    private String nameauthFlag;
+
 
 
     @Override

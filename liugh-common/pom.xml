@@ -50,6 +50,7 @@
             <groupId>com.belerweb</groupId>
             <artifactId>pinyin4j</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
@@ -57,6 +58,11 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sohu</groupId>
+            <artifactId>idcenter</artifactId>
+            <version>1.1.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.ant</groupId>

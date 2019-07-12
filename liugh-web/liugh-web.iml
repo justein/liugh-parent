@@ -72,6 +72,7 @@
     <orderEntry type="library" name="Maven: dom4j:dom4j:1.6.1" level="project" />
     <orderEntry type="library" name="Maven: xml-apis:xml-apis:1.4.01" level="project" />
     <orderEntry type="library" name="Maven: com.belerweb:pinyin4j:2.5.0" level="project" />
+    <orderEntry type="library" name="Maven: com.sohu:idcenter:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.ant:ant:1.9.7" level="project" />
     <orderEntry type="library" name="Maven: org.apache.ant:ant-launcher:1.9.7" level="project" />
     <orderEntry type="library" name="Maven: org.jsoup:jsoup:1.8.1" level="project" />
