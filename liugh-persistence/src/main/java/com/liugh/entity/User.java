@@ -102,6 +102,9 @@ public class User extends Model<User> {
     /**是否实名认证*/
     @TableField("nameauth_flag")
     private String nameauthFlag;
+    /**账户余额*/
+    @TableField("balance")
+    private Double balance;
 
 
 
