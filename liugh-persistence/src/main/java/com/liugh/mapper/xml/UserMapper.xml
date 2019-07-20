@@ -34,6 +34,17 @@
         <result column="role_name" property="roleName" />
     </resultMap>
 
+    <resultMap id="UserToComModel" type="com.liugh.model.UserToCom">
+        <id column="user_no" property="userNo" />
+        <result column="mobile" property="mobile" />
+        <result column="nick_name" property="nickName" />
+        <result column="avatar" property="avatar" />
+        <result column="nameauth_flag" property="nameauthFlag" />
+        <result column="job" property="job" />
+        <result column="acquire_stars" property="acquireStars" />
+        <result column="company_name" property="companyName" />
+        <result column="person_number" property="personNubmer" />
+    </resultMap>
 
     <!-- 等同于编写一个普通 list 查询，mybatis-plus 自动替你分页 -->
     <select id="selectPageByConditionUser"  resultMap="UserModel">
@@ -51,6 +62,23 @@
             #{item}
         </foreach>
         ORDER BY u.create_time DESC
+    </select>
+    <select id="getUserListByCompanyName" resultMap="UserToComModel">
+SELECT
+	u.user_no,
+	u.mobile,
+	u.nick_name,
+	u.avatar,
+	u.job,
+	u.acquire_stars,
+	u.nameauth_flag,
+	c.company_name,
+	c.person_number
+FROM
+	tb_user u
+LEFT JOIN tb_company c ON u.company_id = c.id
+WHERE u.status = #{status} and
+	c.company_name LIKE concat('%',#{companyName},'%')
     </select>
 
 </mapper>

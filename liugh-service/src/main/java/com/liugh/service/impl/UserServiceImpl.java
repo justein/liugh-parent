@@ -9,6 +9,7 @@ import com.liugh.base.Constant;
 import com.liugh.base.PublicResultConstant;
 import com.liugh.entity.Menu;
 import com.liugh.entity.SmsVerify;
+import com.liugh.model.UserToCom;
 import com.liugh.service.*;
 import com.liugh.entity.User;
 import com.liugh.entity.UserToRole;
@@ -118,6 +119,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     public Page<User> selectPageByConditionUser(Page<User> userPage, String info, Integer[] status, String startTime, String endTime) {
         //注意！！ 分页 total 是经过插件自动 回写 到传入 page 对象
         return userPage.setRecords(mapper.selectPageByConditionUser(userPage, info,status,startTime,endTime));
+    }
+
+    @Override
+    public Page<UserToCom> getCompanyUserList(Page<UserToCom> userPage, String companyName, Integer status) {
+        return userPage.setRecords(mapper.getUserListByCompanyName(userPage, companyName, status));
     }
 
     @Override

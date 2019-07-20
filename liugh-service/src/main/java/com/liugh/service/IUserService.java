@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.liugh.entity.User;
 import com.baomidou.mybatisplus.service.IService;
+import com.liugh.model.UserToCom;
 
 import java.util.Map;
 
@@ -39,6 +40,8 @@ public interface IUserService extends IService<User> {
     void deleteByUserNo(String userNo)throws Exception;
 
     Page<User> selectPageByConditionUser(Page<User> userPage, String info, Integer[] status, String startTime, String endTime);
+
+    Page<UserToCom> getCompanyUserList(Page<UserToCom> userPage, String companyName, Integer status);
 
     Map<String,Object> checkMobileAndPasswd(JSONObject requestJson)throws Exception;
 

@@ -13,6 +13,7 @@ import com.liugh.base.PublicResultConstant;
 import com.liugh.config.ResponseHelper;
 import com.liugh.config.ResponseModel;
 import com.liugh.entity.User;
+import com.liugh.model.UserToCom;
 import com.liugh.service.IUserService;
 import com.liugh.util.ComUtil;
 import io.swagger.annotations.ApiImplicitParam;
@@ -107,6 +108,27 @@ public class UserController {
                                  @RequestParam(value = "username", defaultValue = "",required = false) String username) {
         return ResponseHelper.buildResponseModel(userService.selectPage(new Page<>(pageIndex, pageSize),
             ComUtil.isEmpty(username)?new EntityWrapper<User>(): new EntityWrapper<User>().like("user_name", username)));
+    }
+
+    @PostMapping(value = "/companyUserList")
+    @AccessLimit(perSecond = 1,timeOut = 300)
+    @Pass
+    @ApiOperation(value="获取某个公司的员工列表", notes="需要header里加入Authorization")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "pageIndex", value = "第几页"
+                    , dataType = "String",paramType="query"),
+            @ApiImplicitParam(name = "pageSize", value = "每页多少条"
+                    , dataType = "String",paramType="query"),
+            @ApiImplicitParam(name = "companyName", value = "公司名称或简称"
+                    , dataType = "String", required = true, paramType="query" )
+    })
+    public ResponseModel<Page<UserToCom>> findCompanyUserList(@RequestParam(name = "pageIndex", defaultValue = "1", required = false) Integer pageIndex,
+                                              @RequestParam(name = "pageSize", defaultValue = "10", required = false) Integer pageSize,
+                                              @RequestParam(value = "companyName", defaultValue = "",required = false) String companyName) {
+        /**此处默认查询有效用户， status = 1； status = 0 则为进入黑名单的用户  Lyn  2019年7月20日 15点31分*/
+        Integer status = 1;
+        Page<UserToCom> userPage =  userService.getCompanyUserList(new Page<UserToCom>(pageIndex, pageSize), companyName, status);
+        return ResponseHelper.buildResponseModel(userPage);
     }
 
     @GetMapping("/admin/infoList")

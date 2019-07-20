@@ -3,6 +3,7 @@ package com.liugh.mapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.liugh.entity.User;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.liugh.model.UserToCom;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -22,5 +23,5 @@ public interface UserMapper extends BaseMapper<User> {
     List<User> selectPageByConditionUser(Page<User> page, @Param("info") String info,
                                          @Param("status") Integer [] status, @Param("startTime")String startTime, @Param("endTime")String endTime);
 
-
+    List<UserToCom> getUserListByCompanyName(Page<UserToCom> page, @Param("companyName") String companyName, @Param("status") Integer status);
 }
