@@ -39,6 +39,8 @@ public class Constant {
     //禁用
     public static final int DISABLE = 0;
 
+    public static final String NICKNAME_URL = "https://www.qmsjmfb.com/";
+
     public static class FilePostFix{
         public static final String ZIP_FILE =".zip";
 

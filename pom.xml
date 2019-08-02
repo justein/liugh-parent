@@ -149,7 +149,6 @@
                 <artifactId>gson</artifactId>
                 <version>${gson.version}</version>
             </dependency>
-
             <!-- mybatis-plus begin -->
             <dependency>
                 <groupId>com.baomidou</groupId>

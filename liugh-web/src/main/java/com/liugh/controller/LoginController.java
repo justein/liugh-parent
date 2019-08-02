@@ -74,6 +74,13 @@ public class LoginController {
         return ResponseHelper.buildResponseModel( userService.checkAndRegisterUser(requestJson));
     }
 
+    @PostMapping("/common-register")
+    @Log(action="common-register",modelName= "Login",description="普通用户开放注册接口")
+    @Pass
+    public ResponseModel<User> commonRegister(@ValidationParam("username,password,rePassword,mobile")
+                                        @RequestBody JSONObject requestJson)throws Exception {
+        return ResponseHelper.buildResponseModel( userService.checkAndRegisterUser(requestJson));
+    }
 
     @ApiOperation(value="忘记密码", notes="body体参数,不需要Authorization",produces = "application/json")
     @ApiImplicitParams({

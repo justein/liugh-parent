@@ -27,7 +27,7 @@ import java.security.KeyStore;
 import java.util.ArrayList;
 
 /**
- * @author liugh
+ * @author Lyn
  * @since on 2018/7/25
  */
 public final class HttpUtil {

@@ -15,6 +15,7 @@ import com.liugh.entity.User;
 import com.liugh.entity.UserToRole;
 import com.liugh.mapper.UserMapper;
 import com.liugh.util.*;
+import org.apache.commons.httpclient.NameValuePair;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -73,7 +74,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public User register(User user, String  roleCode) {
+
         user.setUserNo(GenerationSequenceUtil.generateUUID("user"));
+
+        /**获取用户昵称  Lyn 2019-08-01 14:20:35*/
+        ArrayList<NameValuePair> paramList = new ArrayList<>();
+        paramList.add(new NameValuePair("xing",""));
+        paramList.add(new NameValuePair("ming","all"));
+        paramList.add(new NameValuePair("num","10"));
+        paramList.add(new NameValuePair("sex","all"));
+
+        String pageContent = HttpUtil.post(Constant.NICKNAME_URL,paramList);
+        System.out.println(pageContent);
+        String nickName = pageContent.substring(pageContent.indexOf("<li>")+4,pageContent.indexOf("</li>"));
+//        System.out.println(nickName);
+        user.setNickname(nickName);
         user.setCreateTime(LocalDateTime.now());
         boolean result = this.insert(user);
         if (result) {
